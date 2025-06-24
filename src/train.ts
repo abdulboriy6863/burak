@@ -13,7 +13,7 @@
 function getPositive(a: number[]) {
   let result = a
     .filter((eleEle) => {
-      return eleEle >= 0;
+      return eleEle > 0;
     })
     .join("");
 
