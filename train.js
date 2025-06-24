@@ -34,4 +34,15 @@ import moment from 'moment';
 const moment = require ('moment');
 */
 
-//Environmental variable file
+/*Environmental variable file
+mahfiy malumotlarni shunga yorish kerak
+.environmental variable lar doyim katta harif bilan yoziladi
+*/
+
+/*
+Birinchi mongo db data basemida cluster vujudga keladi. Aynan shu clusterda biz (REJA)ni ochdik va (BURAK)ni ochdik
+Bir nechta loyihalar uchun har hil database lar hosil boladi keyin
+Uni ichda joylashgan malumotlar collenction deyiladi
+Aynan collection ni ichidagi bitta data bizga document deb ataladi
+CLUSTER => DATABASE => COLLECTION => DOCUMENT
+*/
