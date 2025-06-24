@@ -12,6 +12,4 @@ mongoose
     console.log("MongoDB connection succeed");
     const PORT = process.env.PORT ?? 3003;
   })
-  .catch((err) => {
-    console.log("ERROR on connection MongoDB", err);
-  });
+  .catch((err) => console.log("ERROR on connection MongoDB", err));
