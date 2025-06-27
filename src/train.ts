@@ -10,15 +10,23 @@
 // getHighestIndex([40, 24, 15]);
 
 //TASK H
-function getPositive(a: number[]) {
-  let result = a
-    .filter((eleEle) => {
-      return eleEle > 0;
-    })
-    .join("");
+// function getPositive(a: number[]) {
+//   let result = a
+//     .filter((eleEle) => {
+//       return eleEle > 0;
+//     })
+//     .join("");
 
-  console.log(result);
+//   console.log(result);
+//   console.log(typeof result);
+//   // console.log(`"${result}"`);
+// }
+// getPositive([1, -4, -30, 2]);
+
+//TASK H2
+function getDigits(a: string) {
+  const result = a.split("").filter(Number).join("");
   console.log(typeof result);
-  // console.log(`"${result}"`);
+  console.log(result);
 }
-getPositive([1, -4, -30, 2]);
+getDigits("a14k139dji");
