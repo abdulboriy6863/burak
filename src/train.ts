@@ -9,6 +9,8 @@
 // }
 // getHighestIndex([40, 24, 15]);
 
+// import { log } from "console";
+
 //TASK H
 // function getPositive(a: number[]) {
 //   let result = a
@@ -24,9 +26,38 @@
 // getPositive([1, -4, -30, 2]);
 
 //TASK H2
-function getDigits(a: string) {
-  const result = a.split("").filter(Number).join("");
-  console.log(typeof result);
-  console.log(result);
+// function getDigits(a: string) {
+//   const result = a.split("").filter(Number).join("");
+//   console.log(typeof result);
+//   console.log(result);
+// }
+// getDigits("a14k139dji");
+
+//TASK I
+
+// function majorityElement(a: number[]) {
+//   const maxValue = Math.max(...a);
+//   const maxIndex = a.indexOf(maxValue);
+//   console.log(
+//     ` ${maxValue} <= Arrayimzda eng ko'p kelgan son bo'lib uning Indexisi  ${maxIndex} qaytadi`
+//   );
+// }
+
+// majorityElement([1, 2, 3, 3, 5, 3, 3, 2]);
+
+function majorityElement(a: number[]) {
+  const count: { [key: number]: number } = {};
+  let maxValue = a[0];
+  let maxCount = 0;
+  for (let num of a) {
+    count[num] = (count[num] || 0) + 1;
+
+    if (count[num] > maxCount) {
+      maxCount = count[num];
+      maxValue = num;
+    }
+  }
+  console.log(`Majority Element: ${maxValue}`);
 }
-getDigits("a14k139dji");
+
+majorityElement([1, 4, 1, 3, 1, 1, 3, 2, 2]);
