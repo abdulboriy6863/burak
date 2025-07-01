@@ -34,17 +34,6 @@
 // getDigits("a14k139dji");
 
 //TASK I
-
-// function majorityElement(a: number[]) {
-//   const maxValue = Math.max(...a);
-//   const maxIndex = a.indexOf(maxValue);
-//   console.log(
-//     ` ${maxValue} <= Arrayimzda eng ko'p kelgan son bo'lib uning Indexisi  ${maxIndex} qaytadi`
-//   );
-// }
-
-// majorityElement([1, 2, 3, 3, 5, 3, 3, 2]);
-
 function majorityElement(a: number[]) {
   const count: { [key: number]: number } = {};
   let maxValue = a[0];

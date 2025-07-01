@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
-import { MemberInput } from "../libs/types/member";
+import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
 const restaurantController: T = {};
@@ -33,23 +33,39 @@ restaurantController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processLogin = (req: Request, res: Response) => {
+restaurantController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
-    res.send("DONE");
+    console.log("body:", req.body);
+    const input: LoginInput = req.body;
+
+    const memberService = new MemberService();
+    //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
+    const result = await memberService.processLogin(input);
+
+    res.send(result);
   } catch (err) {
     console.log("Error, processLogin", err);
+    res.send(err);
   }
 };
+
+//define
 restaurantController.processSignup = async (req: Request, res: Response) => {
+  //restaurantController degan objectimizni processSignup degan async methodiga 2ta parametr beramiz
   try {
-    console.log("processSignup");
+    //Shuyergacha behato kirib keladi va 50 chi qatordan 58 chi qatorgacha qanaqadur hatolik vujudga kelsa TRY uni ushlab olib CATCH ga beradi
+    console.log("processSignup"); // log qilishimizni sababi => requestimiz backandga kirib keladimi yana bu (loging standarti)
 
     const newMember: MemberInput = req.body;
     newMember.memberType = MemberType.RESTAURANT;
+    //nima uchun memeber type ni RESTAURANT deb belgiladik? Sababi agar biz bunday belgilamaganimizda u bydefault USER deb ketardi
 
     const memberService = new MemberService();
+    //MemberService MODELdan instins olib yangi object hosil qilaypsmiz
+
     const result = await memberService.processSignup(newMember);
+    //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
 
     res.send(result);
   } catch (err) {
@@ -59,3 +75,6 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 };
 
 export default restaurantController;
+
+//request => frontenddan kelayatogan requestimiz
+//response => backenddan chiqib ketayotgan responsimiz
