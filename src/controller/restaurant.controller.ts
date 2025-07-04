@@ -5,6 +5,9 @@ import MemberService from "../models/Member.service";
 import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
+const memberService = new MemberService();
+//MemberService MODELdan instins olib yangi object hosil qilaypsmiz
+
 const restaurantController: T = {};
 restaurantController.goHome = (req: Request, res: Response) => {
   try {
@@ -15,14 +18,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
     console.log("Error, goHome", err);
   }
 };
-restaurantController.getLogin = (req: Request, res: Response) => {
-  try {
-    console.log("getLogin");
-    res.send("Login Page");
-  } catch (err) {
-    console.log("Error, getLogin", err);
-  }
-};
+
 restaurantController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
@@ -33,20 +29,12 @@ restaurantController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processLogin = async (req: Request, res: Response) => {
+restaurantController.getLogin = (req: Request, res: Response) => {
   try {
-    console.log("processLogin");
-    console.log("body:", req.body);
-    const input: LoginInput = req.body;
-
-    const memberService = new MemberService();
-    //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
-    const result = await memberService.processLogin(input);
-
-    res.send(result);
+    console.log("getLogin");
+    res.send("Login Page");
   } catch (err) {
-    console.log("Error, processLogin", err);
-    res.send(err);
+    console.log("Error, getLogin", err);
   }
 };
 
@@ -61,15 +49,31 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     newMember.memberType = MemberType.RESTAURANT;
     //nima uchun memeber type ni RESTAURANT deb belgiladik? Sababi agar biz bunday belgilamaganimizda u bydefault USER deb ketardi
 
-    const memberService = new MemberService();
-    //MemberService MODELdan instins olib yangi object hosil qilaypsmiz
-
     const result = await memberService.processSignup(newMember);
     //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
+    //TODO: TOKENS
 
     res.send(result);
   } catch (err) {
     console.log("Error, processSignup", err);
+    res.send(err);
+  }
+};
+
+restaurantController.processLogin = async (req: Request, res: Response) => {
+  try {
+    console.log("processLogin");
+    console.log("body:", req.body);
+    const input: LoginInput = req.body;
+    //TODO: TOKENS
+
+    // const memberService = new MemberService();
+    //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
+    const result = await memberService.processLogin(input);
+
+    res.send(result);
+  } catch (err) {
+    console.log("Error, processLogin", err);
     res.send(err);
   }
 };

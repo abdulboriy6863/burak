@@ -34,19 +34,29 @@
 // getDigits("a14k139dji");
 
 //TASK I
-function majorityElement(a: number[]) {
-  const count: { [key: number]: number } = {};
-  let maxValue = a[0];
-  let maxCount = 0;
-  for (let num of a) {
-    count[num] = (count[num] || 0) + 1;
+// function majorityElement(a: number[]) {
+//   const count: { [key: number]: number } = {};
+//   let maxValue = a[0];
+//   let maxCount = 0;
+//   for (let num of a) {
+//     count[num] = (count[num] || 0) + 1;
 
-    if (count[num] > maxCount) {
-      maxCount = count[num];
-      maxValue = num;
-    }
-  }
-  console.log(`Majority Element: ${maxValue}`);
+//     if (count[num] > maxCount) {
+//       maxCount = count[num];
+//       maxValue = num;
+//     }
+//   }
+//   console.log(maxValue);
+// }
+
+// majorityElement([1, 3, 1, 1, 3, 2, 2, 56]);
+
+//TASK J
+function findLongestWord(a: string) {
+  const words = a.split(" ");
+  // Sort words by length in descending order
+  const result = words.sort((a, b) => b.length - a.length);
+  console.log(result[0]); // The first element is the longest word
 }
 
-majorityElement([1, 4, 1, 3, 1, 1, 3, 2, 2]);
+findLongestWord("I come from Yamakashteinss Rakhmonovgayratbek");

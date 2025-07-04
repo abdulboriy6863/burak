@@ -11,6 +11,54 @@ class MemberServive {
   constructor() {
     this.memberModel = MemberModel;
   }
+
+  /* SPA */
+
+  //interface
+  public async signup(input: MemberInput): Promise<Member> {
+    const salt = await bcrypt.genSalt();
+    input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
+
+    try {
+      const result = await this.memberModel.create(input);
+
+      result.memberPassword = "";
+      //password frontendga bormasligi uchun unga qiymat bermayapmiz, shunchaki bo'sh string qaytaryapmiz
+      return result.toJSON();
+    } catch (err) {
+      console.error("Error, model:siginup", err);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NIKE_PHONE);
+    }
+  }
+
+  public async login(input: LoginInput): Promise<Member> {
+    //TODO: consider member status later
+    const member = await this.memberModel
+      //skima model
+
+      .findOne(
+        { memberNick: input.memberNick },
+        { memberNick: 1, memberPassword: 1 }
+        //bizga mahfiy bolgan malumotlarni database dan chaqirib olish mehanizmi
+      )
+      .exec();
+    if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NNICK);
+
+    const isMatch = await bcrypt.compare(
+      input.memberPassword,
+      member.memberPassword
+    );
+
+    // const isMatch = input.memberPassword === member.memberPassword;
+    if (!isMatch) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
+    }
+
+    return await this.memberModel.findById(member._id).lean().exec();
+  }
+
+  /* BSSR */
+
   //interface
   public async processSignup(input: MemberInput): Promise<Member> {
     //processSignup async methodini unga INPUT nomli bitta parametrni yozyapsiz va async methodi bo'lganligi uchun PROMISEda javob berib MEMBERNI qaytaradi
