@@ -13,7 +13,8 @@ restaurantController.goHome = (req: Request, res: Response) => {
   try {
     /**TRY ning vazifasi => agarda mantiqlar ko'p bo'lib bror qatorda hatolik yuz bersa u o'sha yerda toxtedi va keyingi qatorga otmaydi. U hatolik esa errorga yetib keladi */
     console.log("goHome");
-    res.send("Home Page");
+    res.render("home");
+    //send || json || redirect || end || render
   } catch (err) {
     console.log("Error, goHome", err);
   }
@@ -22,7 +23,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
 restaurantController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
-    res.send("Signup Page");
+    res.render("signup");
     //typeof res => send | json | redirect | end | render
   } catch (err) {
     console.log("Error, getSignup", err);
@@ -32,7 +33,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
 restaurantController.getLogin = (req: Request, res: Response) => {
   try {
     console.log("getLogin");
-    res.send("Login Page");
+    res.render("login");
   } catch (err) {
     console.log("Error, getLogin", err);
   }
@@ -51,7 +52,7 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 
     const result = await memberService.processSignup(newMember);
     //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
-    //TODO: TOKENS
+    //TODO: SESSION
 
     res.send(result);
   } catch (err) {
@@ -65,7 +66,7 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
     console.log("processLogin");
     console.log("body:", req.body);
     const input: LoginInput = req.body;
-    //TODO: TOKENS
+    //TODO: SESSION
 
     // const memberService = new MemberService();
     //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz

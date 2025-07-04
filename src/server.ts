@@ -21,7 +21,8 @@ mongoose
     console.log("MongoDB connection succeed");
     const PORT = process.env.PORT ?? 3003;
     app.listen(PORT, function () {
-      console.log(`The server is running successfully on port: ${PORT}`);
+      console.info(`The server is running successfully on port: ${PORT}`);
+      console.info(`Admin project on http://localhost:${PORT}/admin \n`);
     });
     // 11.Agarda app objectini listen degan methodini yozsak u bizni serverimizni yurgizib beradi va
     // Agar hato bolmasa keyin BACKEND SERVERNI ishga tushiramiz

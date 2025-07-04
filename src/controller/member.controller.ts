@@ -20,7 +20,7 @@ memberController.signup = async (req: Request, res: Response) => {
 
     const input: MemberInput = req.body,
       //MemberService MODELdan instins olib yangi object hosil qilaypsmiz
-      //TODO: TOKENS
+      //TODO: TOKENS AUTHENTICATION
 
       result: Member = await memberService.signup(input);
     //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
@@ -40,7 +40,7 @@ memberController.login = async (req: Request, res: Response) => {
     const input: LoginInput = req.body,
       //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
       result = await memberService.login(input);
-    //TODO: TOKENS
+    //TODO: TOKENS AUTHENTICATION
 
     res.json({ member: result });
   } catch (err) {
