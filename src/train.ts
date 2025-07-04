@@ -54,9 +54,9 @@
 //TASK J
 function findLongestWord(a: string) {
   const words = a.split(" ");
-  // Sort words by length in descending order
+
   const result = words.sort((a, b) => b.length - a.length);
-  console.log(result[0]); // The first element is the longest word
+  console.log(result[0]);
 }
 
-findLongestWord("I come from Yamakashteinss Rakhmonovgayratbek");
+findLongestWord("I come from  Rakhmonovgayratbek");
