@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from "express"; //?????
 
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
@@ -62,15 +62,27 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 };
 
 restaurantController.processLogin = async (req: Request, res: Response) => {
+  //restaurantController objectini async processLogin methodini hosil qilyapmiz
+  //uni ikta parametri bor req va res
+
   try {
+    // try catch dan foydalanyapmiz agarda malumotlarimda qanaqadur hatolik faydo boladigon bolsa serverni crash qilmasdan uni catch da ushlab olyapmiz
     console.log("processLogin");
+    //qayerda turganimizni bilish uchun
     console.log("body:", req.body);
+    //req bodiydan kelayotgan malumotlarni korish uchun
     const input: LoginInput = req.body;
+    //req.bodydan kelayotgan malumotlarni  constanta inputga tenglayapmiz hamda type ni loging input qilib belgiladik
+
     //TODO: SESSION
 
     // const memberService = new MemberService();
+    //member servis classidan memberservis  INSTINSINI hosil qildik
     //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
     const result = await memberService.processLogin(input);
+    //memberService objectini processLogin methodi orqali argument sifatida inputni pass qilib uni Call qilyapmiz va natijani kuttirib constanta resultga teglayapmiz
+
+    //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
 
     res.send(result);
   } catch (err) {

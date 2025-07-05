@@ -88,28 +88,43 @@ class MemberServive {
   }
 
   public async processLogin(input: LoginInput): Promise<Member> {
+    //memberservis classimzni ichida async processLogin ni hosil qilyapmiz paramter sifatida inputni pass qilyapmiz va u promisda member qaytaradi
+
     const member = await this.memberModel
-      //skima model
+      //member skima modelini findone static methodini call qilib unga ikta argument pass qilyapti
+
+      // natijanni kuttirib konstanta memberga tenglayapmiz (last)
 
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }
+        { memberNick: input.memberNick }, //FILTER buni vazifasi databasadan membernik boyicha malumotlarni izledi
+        { memberNick: 1, memberPassword: 1 } //agar malumot topiladigon bolsa membernick va Member passwordni majburlab olish
         //bizga mahfiy bolgan malumotlarni database dan chaqirib olish mehanizmi
+        //.select("+memberPassword")
       )
       .exec();
+    console.log("member:", member);
+    // member malumotlarni tekshirish uchun uni log qilib olddik
+    //executionni ishga tushurib qureyni yakunladik
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NNICK);
+    //agarda member malumotlarni falsy boladigon bolsa ozimizni costumise ERROR classimizdan foydalannib (HttpCode.NOT_FOUND, Message.NO_MEMBER_NNICK) shu hatolarni berishini aytyappiz
+    //agar bu yerda hatolik bolmedigon bolsa
 
-    const isMatch = await bcrypt.compare(
-      input.memberPassword,
-      member.memberPassword
+    const isMatch: boolean = await bcrypt.compare(
+      //bcrypt objectini compare methodini call qilib unga ikta argumnetni pass qilyapmiz
+      input.memberPassword, //frontendan dan kelgan memberpassword ni
+      member.memberPassword // database da mavjud bolgan member passwor
+      //bilan taqqoslab natijani kuttirib isMatch degan constantaga tengladik
     );
 
     // const isMatch = input.memberPassword === member.memberPassword;
     if (!isMatch) {
+      //agarda yana falsy qiymat qaytadigon bolsa yana  ERRORS degan classdan foydalanib  shu hatoliklarni beryapmiz
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
 
+    //agarda hech qanday hotolik bolmaydigon bolsa member skima modelini findone static methodini call qilib unga member._id ni argument sifatida pass qilyapmiz hamda executionni yakunlab natijani kuttirib uni return qildik
     return await this.memberModel.findOne(member._id).exec();
+    //qaytatdan member malumotlarni topib keladida va uni reeturn qilib Frontendga chiroyli mantiqlarni jonatadi
   }
 }
 

@@ -52,11 +52,29 @@
 // majorityElement([1, 3, 1, 1, 3, 2, 2, 56]);
 
 //TASK J
-function findLongestWord(a: string) {
-  const words = a.split(" ");
+// function findLongestWord(a: string) {
+//   const words = a.split(" "),
+//     result = words.sort((a, b) => b.length - a.length);
+//   console.log(result[0]);
+// }
 
-  const result = words.sort((a, b) => b.length - a.length);
-  console.log(result[0]);
+// findLongestWord("I come from  Rakhmonovgayratbek");
+
+//TASK K
+function countVowels(string: string) {
+  var counter = 0;
+  for (let i = 0; i < string.length; i++) {
+    if (
+      string[i] == "a" ||
+      string[i] == "e" ||
+      string[i] == "i" ||
+      string[i] == "o" ||
+      string[i] == "u"
+    ) {
+      counter++;
+    }
+  }
+  console.log(`Bu so'zimizni ichida ${counter} ta unli harf bor`);
 }
 
-findLongestWord("I come from  Rakhmonovgayratbek");
+countVowels("strinaag");
