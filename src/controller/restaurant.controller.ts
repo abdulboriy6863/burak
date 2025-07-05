@@ -4,6 +4,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
+import { Message } from "../libs/Errors";
 
 const memberService = new MemberService();
 //MemberService MODELdan instins olib yangi object hosil qilaypsmiz
@@ -97,6 +98,32 @@ restaurantController.processLogin = async (
     //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
   } catch (err) {
     console.log("Error, processLogin", err);
+    res.send(err);
+  }
+};
+
+//-------------
+
+restaurantController.checkAuthSession = async (
+  req: AdminRequest,
+  res: Response
+) => {
+  //restaurantController objectini async processLogin methodini hosil qilyapmiz
+  //uni ikta parametri bor req va res
+
+  try {
+    // try catch dan foydalanyapmiz agarda malumotlarimda qanaqadur hatolik faydo boladigon bolsa serverni crash qilmasdan uni catch da ushlab olyapmiz
+    console.log("checkAuthSession");
+    //qayerda turganimizni bilish uchun
+    if (req.session?.member)
+      res.send(
+        `<script> alert ("${req.session.member.memberNick}")</script>, `
+      );
+    else res.send(`<script> alert ("${Message.NOT_AUTHENTICATED}")</script>`);
+
+    //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
+  } catch (err) {
+    console.log("Error, checkAuthSession", err);
     res.send(err);
   }
 };

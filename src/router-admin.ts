@@ -17,6 +17,7 @@ routerAdmin
 //URLimiz SIGNUP methodimiz POST manashu 2ta shart bajarilsa restaurantController objectimizni processSignup methodiga jonatadi
 /**Product */
 /**User */
+routerAdmin.get("/check-me", restaurantController.checkAuthSession);
 
 export default routerAdmin;
 
