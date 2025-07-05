@@ -2,7 +2,7 @@ import { Request, Response } from "express"; //?????
 
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
-import { LoginInput, MemberInput } from "../libs/types/member";
+import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
 const memberService = new MemberService();
@@ -40,7 +40,10 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 };
 
 //define
-restaurantController.processSignup = async (req: Request, res: Response) => {
+restaurantController.processSignup = async (
+  req: AdminRequest,
+  res: Response
+) => {
   //restaurantController degan objectimizni processSignup degan async methodiga 2ta parametr beramiz
   try {
     //Shuyergacha behato kirib keladi va 50 chi qatordan 58 chi qatorgacha qanaqadur hatolik vujudga kelsa TRY uni ushlab olib CATCH ga beradi
@@ -52,16 +55,22 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 
     const result = await memberService.processSignup(newMember);
     //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
-    //TODO: SESSION
 
-    res.send(result);
+    //TODO: SESSION
+    req.session.member = result;
+    req.session.save(function () {
+      res.send(result);
+    });
   } catch (err) {
     console.log("Error, processSignup", err);
     res.send(err);
   }
 };
 
-restaurantController.processLogin = async (req: Request, res: Response) => {
+restaurantController.processLogin = async (
+  req: AdminRequest,
+  res: Response
+) => {
   //restaurantController objectini async processLogin methodini hosil qilyapmiz
   //uni ikta parametri bor req va res
 
@@ -74,17 +83,18 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
     const input: LoginInput = req.body;
     //req.bodydan kelayotgan malumotlarni  constanta inputga tenglayapmiz hamda type ni loging input qilib belgiladik
 
-    //TODO: SESSION
-
     // const memberService = new MemberService();
     //member servis classidan memberservis  INSTINSINI hosil qildik
     //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
     const result = await memberService.processLogin(input);
     //memberService objectini processLogin methodi orqali argument sifatida inputni pass qilib uni Call qilyapmiz va natijani kuttirib constanta resultga teglayapmiz
 
+    //TODO: SESSION
+    req.session.member = result;
+    req.session.save(function () {
+      res.send(result);
+    });
     //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
-
-    res.send(result);
   } catch (err) {
     console.log("Error, processLogin", err);
     res.send(err);
