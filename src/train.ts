@@ -61,20 +61,29 @@
 // findLongestWord("I come from  Rakhmonovgayratbek");
 
 //TASK K
-function countVowels(string: string) {
-  var counter = 0;
-  for (let i = 0; i < string.length; i++) {
-    if (
-      string[i] == "a" ||
-      string[i] == "e" ||
-      string[i] == "i" ||
-      string[i] == "o" ||
-      string[i] == "u"
-    ) {
-      counter++;
-    }
-  }
-  console.log(`Bu so'zimizni ichida ${counter} ta unli harf bor`);
+// function countVowels(string: string) {
+//   var counter = 0;
+//   for (let i = 0; i < string.length; i++) {
+//     if (
+//       string[i] == "a" ||
+//       string[i] == "e" ||
+//       string[i] == "i" ||
+//       string[i] == "o" ||
+//       string[i] == "u"
+//     ) {
+//       counter++;
+//     }
+//   }
+//   console.log(`Bu so'zimizni ichida ${counter} ta unli harf bor`);
+// }
+
+// countVowels("strinaag");
+
+//TASK L
+function reverseSentence(a: string) {
+  const result = a.split("").reverse().join("");
+  const result2 = result.split(" ").reverse().join(" ").toLowerCase();
+  console.log(result2);
 }
 
-countVowels("strinaag");
+reverseSentence("We like coding");
