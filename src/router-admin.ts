@@ -17,9 +17,23 @@ routerAdmin
 //
 //URLimiz SIGNUP methodimiz POST manashu 2ta shart bajarilsa restaurantController objectimizni processSignup methodiga jonatadi
 /*Product */
-routerAdmin.get("/product/all", productController.getAllProducts);
-routerAdmin.post("/product/create", productController.createNewProduct);
-routerAdmin.post("/product/:id", productController.updateChosenProduct);
+routerAdmin.get(
+  "/product/all",
+  //STEP 1
+  restaurantController.verifyRestaurant,
+  productController.getAllProducts
+  //STEP 5
+);
+routerAdmin.post(
+  "/product/create",
+  restaurantController.verifyRestaurant,
+  productController.createNewProduct
+);
+routerAdmin.post(
+  "/product/:id",
+  restaurantController.verifyRestaurant,
+  productController.updateChosenProduct
+);
 
 /*User */
 routerAdmin.get("/logout", restaurantController.logout);

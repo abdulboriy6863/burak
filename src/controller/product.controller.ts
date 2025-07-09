@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Errors from "../libs/Errors";
 import { T } from "../libs/types/common";
 import Productservice from "../models/Product.service";
+import { AdminRequest } from "../libs/types/member";
 
 const productService = new Productservice();
 
@@ -9,6 +10,8 @@ const productController: T = {};
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
     console.log("getAllProducts"); // log qilishimizni sababi => requestimiz backandga kirib keladimi yana bu (loging standarti)
+    //STEP 6
+
     res.render("products");
   } catch (err) {
     console.log("Error, getAllProducts", err);

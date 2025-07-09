@@ -1,4 +1,4 @@
-import { Request, Response } from "express"; //?????
+import { NextFunction, Request, Response } from "express"; //?????
 
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
@@ -161,6 +161,30 @@ restaurantController.checkAuthSession = async (
   } catch (err) {
     console.log("Error, checkAuthSession", err);
     res.send(err);
+  }
+};
+
+restaurantController.verifyRestaurant = async (
+  //STEP 2
+  req: AdminRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  //restaurantController objectini async processLogin methodini hosil qilyapmiz
+  //uni ikta parametri bor req va res
+
+  if (req.session?.member?.memberType === MemberType.RESTAURANT) {
+    req.member = req.session.member;
+    //STEP 3
+
+    //buni tenglab product controllerda qabul qilib olishimiz kerak boladi
+    next();
+  } else {
+    const message = Message.NOT_AUTHENTICATED;
+    res.send(
+      `<script> alert ("${message}"); window.location.replace('/admin/login'); </script>`
+      //STEP 4
+    );
   }
 };
 
