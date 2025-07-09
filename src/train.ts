@@ -1,3 +1,12 @@
+//TASK L
+function reverseSentence(a: string) {
+  const result = a.split("").reverse().join("");
+  const result2 = result.split(" ").reverse().join(" ");
+  console.log(result2);
+}
+
+reverseSentence("We like coding");
+
 //TASK G
 // function getHighestIndex(a) {
 //   // return Math.max(...a);
@@ -78,12 +87,3 @@
 // }
 
 // countVowels("strinaag");
-
-//TASK L
-function reverseSentence(a: string) {
-  const result = a.split("").reverse().join("");
-  const result2 = result.split(" ").reverse().join(" ").toLowerCase();
-  console.log(result2);
-}
-
-reverseSentence("We like coding");
