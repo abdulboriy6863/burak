@@ -9,10 +9,13 @@ import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 
 const MongoDBStore = ConnectMongoDB(session);
+//tepadegi pacakagedan (instance) olini va ConnectMongoDB methodiga (session) argumnet sifatida call qildik va ikkalasi ishlab mongodbstore hosil qilindi
 const store = new MongoDBStore({
+  //MongoDBStore bu class bolib kelajakda mongodb ga borib ornashadigon session collectionni hosil qilyapti
   uri: String(process.env.MONGO_URL),
   collection: "sessions",
 });
+// bularni hammasi databasda session bolimini hosil qilish uchun kerak
 
 /* 1-ENTRANCE*/ // KIRISH QISMIDA NIMA QILINADI??
 const app = express(); //OBJECT
@@ -31,13 +34,15 @@ app.use(morgan(MORGAN_FORMAT)); //MiddlaWere DP => Loging jarayonini tashkillash
 /* 2-SESSIONS*/
 app.use(
   session({
+    //session core functionga bitta objectni argument sifatida pass qilyapmiz va buni ichi key va value lardan tashkil topgan ekan
     secret: String(process.env.SESSION_SECRET),
     cookie: {
-      maxAge: 1000 * 3600 * 3, // 3h
+      maxAge: 1000 * 3600 * 3, // 3h davomida umr koradi
     },
     store: store,
     resave: true, //har kirganda ACTIVE holati kirgan vaqidan boshlab 3 soat gacha hisoblaydi
     saveUninitialized: true,
+    // login bolgan va login bolmagan odamlarni ham sessionlarni hosil qilish
   })
 );
 //bizni sessionimiz hosil bolganda bizni mongodbyimiznda session collectioniga murojat etadi

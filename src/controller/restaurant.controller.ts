@@ -97,10 +97,15 @@ restaurantController.processLogin = async (
     //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
     const result = await memberService.processLogin(input);
     //memberService objectini processLogin methodi orqali argument sifatida inputni pass qilib uni Call qilyapmiz va natijani kuttirib constanta resultga teglayapmiz
-
+    // shu yeraga natija keladi yani biz logindagi infoni olamiz
+    // console.log(result);
     //TODO: SESSION
     req.session.member = result;
+    //database di sessioniga borib memberni malumotini joylaydi
+    //2. frontendimizni cokkie siga borib SIT ni joylaydi
+    //SIT nima => bu sessionga tegishli ID "sdsejlklDEKkeDKel-ka7e" shunga oxshagan
     req.session.save(function () {
+      //100% save bolgandan keyin gini ishga tushsin degani
       res.send(result);
     });
     //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
@@ -127,7 +132,6 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
     req.session.destroy(function () {
       res.redirect("/admin");
     });
-    //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
   } catch (err) {
     console.log("Error, checkAuthSession", err);
     res.redirect("/admin");
