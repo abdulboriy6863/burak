@@ -1,11 +1,19 @@
-//TASK L
-function reverseSentence(a: string) {
-  const result = a.split("").reverse().join("");
-  const result2 = result.split(" ").reverse().join(" ");
-  console.log(result2);
+//TASK M
+function getSquareNumbers(a: number[]) {
+  const result = a.map((a) => a * a);
+  console.log(result);
 }
 
-reverseSentence("We like coding");
+getSquareNumbers([1, 2, 3, 5]);
+
+//TASK L
+// function reverseSentence(a: string) {
+//   const result = a.split("").reverse().join("");
+//   const result2 = result.split(" ").reverse().join(" ");
+//   console.log(result2);
+// }
+
+// reverseSentence("We like coding");
 
 //TASK G
 // function getHighestIndex(a) {
