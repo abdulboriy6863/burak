@@ -4,7 +4,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
-import Errors, { Message } from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
 
 const memberService = new MemberService();
 //MemberService MODELdan instins olib yangi object hosil qilaypsmiz
@@ -53,8 +53,12 @@ restaurantController.processSignup = async (
   try {
     //Shuyergacha behato kirib keladi va 50 chi qatordan 58 chi qatorgacha qanaqadur hatolik vujudga kelsa TRY uni ushlab olib CATCH ga beradi
     console.log("processSignup"); // log qilishimizni sababi => requestimiz backandga kirib keladimi yana bu (loging standarti)
+    const file = req.file;
+    if (!file)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
     const newMember: MemberInput = req.body;
+    newMember.memberImage = file?.path;
     newMember.memberType = MemberType.RESTAURANT;
     //nima uchun memeber type ni RESTAURANT deb belgiladik? Sababi agar biz bunday belgilamaganimizda u bydefault USER deb ketardi
 
@@ -64,7 +68,7 @@ restaurantController.processSignup = async (
     //TODO: SESSION
     req.session.member = result;
     req.session.save(function () {
-      res.send(result);
+      res.redirect("/admin/product/all");
     });
   } catch (err) {
     console.log("Error, processSignup", err);
@@ -106,7 +110,7 @@ restaurantController.processLogin = async (
     //SIT nima => bu sessionga tegishli ID "sdsejlklDEKkeDKel-ka7e" shunga oxshagan
     req.session.save(function () {
       //100% save bolgandan keyin gini ishga tushsin degani
-      res.send(result);
+      res.redirect("/admin/product/all");
     });
     //return qilingan malumotni shu yerda qabul qildik va uni res.send orqali uni frontendga jonatyapmiz
   } catch (err) {
