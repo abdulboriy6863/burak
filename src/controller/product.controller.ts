@@ -18,7 +18,10 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     console.log("getAllProducts"); // log qilishimizni sababi => requestimiz backandga kirib keladimi yana bu (loging standarti)
     //STEP 6
 
-    res.render("products");
+    const data = await productService.getAllProducts();
+    console.log("data:", data);
+
+    res.render("products", { products: data });
   } catch (err) {
     console.log("Error, getAllProducts", err);
     if (err instanceof Errors) res.status(err.code).json(err);

@@ -4,6 +4,16 @@
   <div>
     <div>product up</div>
     <div><%=member.memberNick%></div>
+
+    <div>
+      <%products.map ((value, key) => { %>
+      <p>
+        <%= value.productName%> - <%= value.productSize%> - <%=
+        value.productPrice%>
+      </p>
+      <% } ) %>
+    </div>
+    <!-- control flow -->
   </div>
 </body>
 
