@@ -20,7 +20,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
 
     const data = await productService.getAllProducts();
     console.log("data:", data);
-
+    //hato
     res.render("products", { products: data });
   } catch (err) {
     console.log("Error, getAllProducts", err);
@@ -36,7 +36,7 @@ productController.createNewProduct = async (
   try {
     console.log("createNewProduct"); // log qilishimizni sababi => requestimiz backandga kirib keladimi yana bu (loging standarti)
 
-    // console.log("req.files", req.files);
+    console.log("req.files", req.files);
 
     if (!req.files?.length)
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);

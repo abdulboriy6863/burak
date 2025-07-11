@@ -6,7 +6,7 @@ import { v4 } from "uuid";
 function getTargetImageStore(adress: any) {
   return multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, `./uploades/${adress}`);
+      cb(null, `./uploads/${adress}`);
     },
     filename: function (req, file, cb) {
       const extension = path.parse(file.originalname).ext;

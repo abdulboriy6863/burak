@@ -64,7 +64,6 @@ restaurantController.processSignup = async (
 
     const result = await memberService.processSignup(newMember);
     //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
-
     //TODO: SESSION
     req.session.member = result;
     req.session.save(function () {

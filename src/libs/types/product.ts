@@ -29,7 +29,6 @@ export interface ProductInput {
   productSize?: ProductSize;
   productVolume?: number;
   productDesc?: string;
-  productImage?: string[];
   productViews?: number;
 }
 
@@ -43,6 +42,6 @@ export interface ProducUpdatetInput {
   productSize?: ProductSize;
   productVolume?: number;
   productDesc?: string;
-  productImage?: string[];
+  productImages?: string[];
   productViews?: number;
 }
