@@ -1,10 +1,23 @@
 //TASK M
 function getSquareNumbers(a: number[]) {
-  const result = a.map((a) => a * a);
+  let result: { [a: number]: number } = {};
+
+  for (let i = 0; i < a.length; i++) {
+    result[a[i]] = a[i] * a[i];
+  }
+
   console.log(result);
 }
 
-getSquareNumbers([1, 2, 3, 5]);
+getSquareNumbers([1, 2, 3]);
+
+//TASK
+// function getSquareNumbers(a: number[]) {
+//   const result = a.map((a) => a * a) ;
+//   console.log(result);
+// }
+
+// getSquareNumbers([1, 2, 3, 5]);
 
 //TASK L
 // function reverseSentence(a: string) {
