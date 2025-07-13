@@ -1,12 +1,12 @@
 //TASK M
 function getSquareNumbers(a: number[]) {
-  let result: { [a: number]: number } = {};
+  let results: { [a: number]: number } = {};
 
   for (let i = 0; i < a.length; i++) {
-    result[a[i]] = a[i] * a[i];
+    results[a[i]] = a[i] * a[i];
   }
 
-  console.log(result);
+  console.log(results);
 }
 
 getSquareNumbers([1, 2, 3]);
