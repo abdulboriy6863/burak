@@ -6,6 +6,7 @@ import { AdminRequest } from "../libs/types/member";
 import { ProductInput } from "../libs/types/product";
 
 const productService = new Productservice();
+//prodact service module class
 
 const productController: T = {};
 
@@ -19,6 +20,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     //STEP 6
 
     const data = await productService.getAllProducts();
+    //
     console.log("data:", data);
     //hato
     res.render("products", { products: data });
@@ -39,10 +41,11 @@ productController.createNewProduct = async (
     console.log("req.files", req.files);
 
     if (!req.files?.length)
+      //kirib kelayotgan file lengthizi kamida bitta file bolmasa costimized errorlarimizni yuboryappiz
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
     const data: ProductInput = req.body;
     data.productImages = req.files?.map((ele) => {
-      return ele.path;
+      return ele.path.replace(/\\/g, "/");
     });
 
     await productService.createNewProduct(data);

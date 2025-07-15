@@ -78,6 +78,7 @@ class MemberServive {
     try {
       const tempResult = new this.memberModel(input);
       const result = await tempResult.save();
+      // console.log("sjnksjsnkn", result);
 
       result.memberPassword = "";
       //password frontendga bormasligi uchun unga qiymat bermayapmiz, shunchaki bo'sh string qaytaryapmiz
@@ -125,6 +126,16 @@ class MemberServive {
     //agarda hech qanday hotolik bolmaydigon bolsa member skima modelini findone static methodini call qilib unga member._id ni argument sifatida pass qilyapmiz hamda executionni yakunlab natijani kuttirib uni return qildik
     return await this.memberModel.findOne(member._id).exec();
     //qaytatdan member malumotlarni topib keladida va uni reeturn qilib Frontendga chiroyli mantiqlarni jonatadi
+  }
+
+  public async getUsers(): Promise<Member[]> {
+    //qaytarish qiymati array of member
+    const result = await this.memberModel
+      .find({ memberType: MemberType.USER })
+      .exec();
+    //membertypeni qiymati user bolganini izlaydi
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
   }
 }
 

@@ -1,15 +1,29 @@
-//TASK M
-function getSquareNumbers(a: number[]) {
-  let results: { [a: number]: number } = {};
-
-  for (let i = 0; i < a.length; i++) {
-    results[a[i]] = a[i] * a[i];
+//TASK N
+function palindromCheck(a: string) {
+  // const result = a.split("").reverse();
+  const result = a.split("").reverse().join("");
+  if (result == a) {
+    console.log(true);
+  } else {
+    console.log(false);
   }
-
-  console.log(results);
 }
 
-getSquareNumbers([1, 2, 3]);
+// console.log(result);
+palindromCheck("son");
+
+//TASK M
+// function getSquareNumbers(a: number[]) {
+//   let results: { [a: number]: number } = {};
+
+//   for (let i = 0; i < a.length; i++) {
+//     results[a[i]] = a[i] * a[i];
+//   }
+
+//   console.log(results);
+// }
+
+// getSquareNumbers([1, 2, 3]);
 
 //TASK
 // function getSquareNumbers(a: number[]) {

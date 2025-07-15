@@ -21,30 +21,39 @@ routerAdmin
   );
 //
 //URLimiz SIGNUP methodimiz POST manashu 2ta shart bajarilsa restaurantController objectimizni processSignup methodiga jonatadi
+routerAdmin.get("/logout", restaurantController.logout);
+routerAdmin.get("/check-me", restaurantController.checkAuthSession);
+
 /*Product */
 routerAdmin.get(
   "/product/all",
-  //STEP 1
+  //router adminimizni get methodi va urli qanotlantirilsa
   restaurantController.verifyRestaurant,
+  // restaurant controller objectimizni verifay restaurant methodiga yuboryapti authorization ni tekshirish uchun
   productController.getAllProducts
-  //STEP 5
 );
 routerAdmin.post(
   "/product/create",
-  restaurantController.verifyRestaurant,
-  // uploadProductImage.single("productImage"),
+  restaurantController.verifyRestaurant, // authorization
+  //oraliq mantiq middlawere
   makeUploader("products").array("productImages", 5),
+  //make uploader middlawere, req orqali malumotlarini otkizyapti
+  //frontendtan kirib kelayotgan fayllarimizni yuklab beradigon uploader (multer)
   productController.createNewProduct
 );
 routerAdmin.post(
   "/product/:id",
+  //productimizni shu urli qanotlantirilganligi uchun
   restaurantController.verifyRestaurant,
   productController.updateChosenProduct
 );
 
 /*User */
-routerAdmin.get("/logout", restaurantController.logout);
-routerAdmin.get("/check-me", restaurantController.checkAuthSession);
+routerAdmin.get(
+  "/user/all",
+  restaurantController.verifyRestaurant,
+  restaurantController.getUsers
+);
 
 export default routerAdmin;
 

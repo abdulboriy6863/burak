@@ -21,7 +21,7 @@ class Productservice {
 
   public async getAllProducts(): Promise<Product[]> {
     // stringni object id da o'zgartiramiz
-    const result = this.productModel.find().exec();
+    const result = await this.productModel.find().exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     console.log("result", result);
     return result;
