@@ -22,6 +22,7 @@ class Productservice {
   public async getAllProducts(): Promise<Product[]> {
     // stringni object id da o'zgartiramiz
     const result = await this.productModel.find().exec();
+    //product skima  modulimizni find static methodini chaqiryappiz exacution bilan yakunlab natijani kuttirib result ga tenglayappiz
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     console.log("result", result);
     return result;
@@ -33,6 +34,7 @@ class Productservice {
     } catch (err) {
       console.error("Error, model:createNewProduct:", err);
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+      //error class (Errors)
     }
   }
 
@@ -44,6 +46,7 @@ class Productservice {
     id = shapeIntoMongooseObjectId(id);
     const result = await this.productModel
       .findOneAndUpdate({ _id: id }, input, { new: true })
+      //filter, update, option
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
     console.log("result", result);
