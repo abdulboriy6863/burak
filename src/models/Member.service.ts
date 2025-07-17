@@ -79,6 +79,7 @@ class MemberServive {
 
     console.log("before:", input.memberPassword);
     const salt = await bcrypt.genSalt();
+    console.log("salt qilindi", salt);
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
 
     try {

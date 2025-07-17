@@ -58,7 +58,7 @@ restaurantController.processSignup = async (
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path;
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.RESTAURANT;
     //nima uchun memeber type ni RESTAURANT deb belgiladik? Sababi agar biz bunday belgilamaganimizda u bydefault USER deb ketardi
 
@@ -199,7 +199,6 @@ restaurantController.verifyRestaurant = async (
   next: NextFunction
 ) => {
   //restaurantController objectini async processLogin methodini hosil qilyapmiz
-  //uni ikta parametri bor req va res
 
   if (req.session?.member?.memberType === MemberType.RESTAURANT) {
     req.member = req.session.member;

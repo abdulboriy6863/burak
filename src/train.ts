@@ -1,16 +1,27 @@
-//TASK N
-function palindromCheck(a: string) {
-  // const result = a.split("").reverse();
-  const result = a.split("").reverse().join("");
-  if (result == a) {
-    console.log(true);
-  } else {
-    console.log(false);
-  }
-}
+//TASK O
+function calculateSumOfNumbers(a: any[]) {
+  const result = a.reduce(
+    (sum, value) => (typeof value === "number" ? sum + value : sum),
+    0
+  );
 
-// console.log(result);
-palindromCheck("son");
+  console.log(result);
+}
+calculateSumOfNumbers([10, "10", { son: 10 }, false, 15]);
+
+//TASK N
+// function palindromCheck(a: string) {
+//   // const result = a.split("").reverse();
+//   const result = a.split("").reverse().join("");
+//   if (result == a) {
+//     console.log(true);
+//   } else {
+//     console.log(false);
+//   }
+// }
+
+// // console.log(result);
+// palindromCheck("son");
 
 //TASK M
 // function getSquareNumbers(a: number[]) {
