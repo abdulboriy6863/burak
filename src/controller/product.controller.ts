@@ -47,13 +47,12 @@ productController.createNewProduct = async (
     data.productImages = req.files?.map((ele) => {
       return ele.path.replace(/\\/g, "/");
     });
-
     await productService.createNewProduct(data);
     //shuyer
-    // res.send(
-    //   `<script> alert ("Sucessful creation!") window.location.replace('/admin/product/all')</script>,`
-    // );
-    res.send("DONE!!");
+    res.send(
+      `<script> alert ("Sucessful creation!"); window.location.replace('/admin/product/all')</script>`
+    );
+    // res.send("DONE!!");
     //shuyerda togirlanishi kerak bolgan malumot bor
   } catch (err) {
     console.log("Error, createNewProduct", err);

@@ -10,7 +10,7 @@ import { MemberType } from "../libs/enums/member.enum";
 import * as bcrypt from "bcryptjs";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 
-class MemberServive {
+class MemberService {
   private readonly memberModel;
 
   //pascalcase
@@ -81,17 +81,22 @@ class MemberServive {
     const salt = await bcrypt.genSalt();
     console.log("salt qilindi", salt);
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
+    console.log("INPUT", input);
 
     try {
-      const tempResult = new this.memberModel(input);
-      const result = await tempResult.save();
-      // console.log("sjnksjsnkn", result);
+      const result = await this.memberModel.create(input);
+      console.log("RESULT::", result);
+
+      // const result = await tempResult.save();
+      console.log("sjnksjsnkn", result);
 
       result.memberPassword = "";
       //password frontendga bormasligi uchun unga qiymat bermayapmiz, shunchaki bo'sh string qaytaryapmiz
       return result;
     } catch (err) {
+      console.log("messsage", err);
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+      //////HATO BOR
     }
   }
 
@@ -157,7 +162,7 @@ class MemberServive {
   }
 }
 
-export default MemberServive;
+export default MemberService;
 
 //STATIC METHODLAR faqat CLASS lar bilan ishlaydi
 
