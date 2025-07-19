@@ -1,13 +1,20 @@
-//TASK O
-function calculateSumOfNumbers(a: any[]) {
-  const result = a.reduce(
-    (sum, value) => (typeof value === "number" ? sum + value : sum),
-    0
-  );
-
+// TASK P
+function objectToArray(a: object) {
+  const result = Object.entries(a);
   console.log(result);
 }
-calculateSumOfNumbers([10, "10", { son: 10 }, false, 15]);
+objectToArray({ g: 10, r: 200 });
+
+//TASK O
+// function calculateSumOfNumbers(a: any[]) {
+//   const result = a.reduce(
+//     (sum, value) => (typeof value === "number" ? sum + value : sum),
+//     0
+//   );
+
+//   console.log(result);
+// }
+// calculateSumOfNumbers([10, "10", { son: 10 }, false, 15]);
 
 //TASK N
 // function palindromCheck(a: string) {
