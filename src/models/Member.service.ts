@@ -6,7 +6,7 @@ import {
   MemberUpdateInput,
 } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
-import { MemberType } from "../libs/enums/member.enum";
+import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import * as bcrypt from "bcryptjs";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 
@@ -43,13 +43,19 @@ class MemberService {
       //skima model
 
       .findOne(
-        { memberNick: input.memberNick },
-        { memberNick: 1, memberPassword: 1 }
+        {
+          memberNick: input.memberNick,
+          memberStatus: { $ne: MemberStatus.DELETE },
+          //delete bolgan userni qaysi login bolishini cheklayapmiz
+        },
+        { memberNick: 1, memberPassword: 1, memberStatus: 1 }
         //bizga mahfiy bolgan malumotlarni database dan chaqirib olish mehanizmi
       )
       .exec();
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NNICK);
-
+    else if (member.memberStatus === MemberStatus.BLOCK) {
+      throw new Errors(HttpCode.FORBIDDEN, Message.BLOCED_USER);
+    }
     const isMatch = await bcrypt.compare(
       input.memberPassword,
       member.memberPassword
