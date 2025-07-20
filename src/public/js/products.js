@@ -22,57 +22,57 @@ $(function () {
     $("#process-btn").css("display", "flex");
   });
 
-  //   $(".new-product-status").on("change", async function (e) {
+  $(".new-product-status").on("change", async function (e) {
+    const id = e.target.id;
+    const productStatus = $(`#${id}.new-product-status`).val();
+    console.log("id:", id);
+    console.log("productStatus:", productStatus);
+
+    try {
+      const response = await axios.post(`/admin/product/${id}`, {
+        productStatus: productStatus,
+      });
+      console.log("response::", response);
+      const result = response.data;
+      if (result.data) {
+        console.log("product updatad!");
+        $(".new-product-status").blur();
+      } else alert("product update failed!");
+    } catch (err) {
+      console.log(err);
+      alert("product update failed!");
+    }
+  });
+  // $(function () {
+  //   $(".new-product-status").on("change", function (e) {
   //     const id = e.target.id;
+  //     console.log("id", id);
+
   //     const productStatus = $(`#${id}.new-product-status`).val();
   //     console.log("id:", id);
-  //     console.log("productStatus:", productStatus);
+  //     console.log("productStatus", productStatus);
 
-  //     try {
-  //       const response = await axios.post(`/admin/product/${id}`, {
+  //     //TODO: Axios updateChosenUser
+  //     axios
+  //       .post(`/admin/product/${id}`, {
   //         productStatus: productStatus,
+  //       })
+  //       .then((response) => {
+  //         console.log("response", response);
+  //         const result = response.data;
+  //         console.log("result", result);
+
+  //         if (result.data) {
+  //           console.log("Product updated!");
+  //           $(".new-product-status").blur();
+  //         } else alert("Product update failed!");
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         alert("Product update failed!");
   //       });
-  //       console.log("response::", response);
-  //       const result = response.data;
-  //       if (result.data) {
-  //         console.log("product updatad!");
-  //         $(".new-product-status").blur();
-  //       } else alert("product update failed!");
-  //     } catch (err) {
-  //       console.log(err);
-  //       alert("product update failed!");
-  //     }
   //   });
-  $(function () {
-    $(".new-product-status").on("change", function (e) {
-      const id = e.target.id;
-      console.log("id", id);
-
-      const productStatus = $(`#${id}.new-product-status`).val();
-      console.log("id:", id);
-      console.log("productStatus", productStatus);
-
-      //TODO: Axios updateChosenUser
-      axios
-        .post(`/admin/product/${id}`, {
-          productStatus: productStatus,
-        })
-        .then((response) => {
-          console.log("response", response);
-          const result = response.data;
-          console.log("result", result);
-
-          if (result.data) {
-            console.log("Product updated!");
-            $(".new-product-status").blur();
-          } else alert("Product update failed!");
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Product update failed!");
-        });
-    });
-  });
+  // });
 });
 
 function validateForm() {

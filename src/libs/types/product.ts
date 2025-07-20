@@ -7,7 +7,7 @@ import {
 
 export interface Product {
   _id: ObjectId;
-  ProductStatus: ProductStatus;
+  productStatus: ProductStatus;
   productCollection: ProductCollection;
   productName: string;
   productPrice: number;
@@ -21,7 +21,7 @@ export interface Product {
 
 export interface ProductInput {
   productImages: string[];
-  ProductStatus?: ProductStatus;
+  productStatus?: ProductStatus;
   productCollection: ProductCollection;
   productName: string;
   productPrice: number;
@@ -34,7 +34,7 @@ export interface ProductInput {
 
 export interface ProducUpdatetInput {
   _id: ObjectId;
-  ProductStatus?: ProductStatus;
+  productStatus?: ProductStatus;
   productCollection?: ProductCollection;
   productName?: string;
   productPrice?: number;
