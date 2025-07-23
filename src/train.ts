@@ -1,9 +1,17 @@
-// TASK P
-function objectToArray(a: object) {
-  const result = Object.entries(a);
+//TASK Q
+function hasProperty(a: object, b: string) {
+  const result = Object.keys(a).some((keys) => keys === b);
   console.log(result);
 }
-objectToArray({ g: 10, r: 200 });
+hasProperty({ name: "BMW", model: "M3" }, "year");
+hasProperty({ name: "BMW", model: "M3" }, "name");
+
+// TASK P
+// function objectToArray(a: object) {
+//   const result = Object.entries(a);
+//   console.log(result);
+// }
+// objectToArray({ g: 10, r: 200 });
 
 //TASK O
 // function calculateSumOfNumbers(a: any[]) {
