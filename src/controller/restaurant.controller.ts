@@ -92,7 +92,7 @@ restaurantController.processLogin = async (
     // try catch dan foydalanyapmiz agarda malumotlarimda qanaqadur hatolik faydo boladigon bolsa serverni crash qilmasdan uni catch da ushlab olyapmiz
     console.log("processLogin");
     //qayerda turganimizni bilish uchun
-    console.log("body:", req.body);
+    // console.log("body:", req.body);
     //req bodiydan kelayotgan malumotlarni korish uchun
     const input: LoginInput = req.body;
     //req.bodydan kelayotgan malumotlarni  constanta inputga tenglayapmiz hamda type ni loging input qilib belgiladik
@@ -101,6 +101,7 @@ restaurantController.processLogin = async (
     //member servis classidan memberservis  INSTINSINI hosil qildik
     //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
     const result = await memberService.processLogin(input);
+    console.log("Result keldi 3", result);
     //memberService objectini processLogin methodi orqali argument sifatida inputni pass qilib uni Call qilyapmiz va natijani kuttirib constanta resultga teglayapmiz
     // shu yeraga natija keladi yani biz logindagi infoni olamiz
     // console.log(result);

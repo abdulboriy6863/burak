@@ -108,20 +108,22 @@ class MemberService {
 
   public async processLogin(input: LoginInput): Promise<Member> {
     //memberservis classimzni ichida async processLogin ni hosil qilyapmiz paramter sifatida inputni pass qilyapmiz va u promisda member qaytaradi
+    console.log("Shuerga keldi:");
 
     const member = await this.memberModel
+
       //member skima modelini findone static methodini call qilib unga ikta argument pass qilyapti
 
       // natijanni kuttirib konstanta memberga tenglayapmiz (last)
 
       .findOne(
-        { memberNick: input.memberNick }, //FILTER buni vazifasi databasadan membernik boyicha malumotlarni izledi
+        { memberNick: input.memberNick, memberType: MemberType.RESTAURANT }, //FILTER buni vazifasi databasadan membernik boyicha malumotlarni izledi
         { memberNick: 1, memberPassword: 1 } //agar malumot topiladigon bolsa membernick va Member passwordni majburlab olish
         //bizga mahfiy bolgan malumotlarni database dan chaqirib olish mehanizmi
         //.select("+memberPassword")
       )
       .exec();
-    console.log("member:", member);
+    console.log("Shuyerga keldi 2");
     // member malumotlarni tekshirish uchun uni log qilib olddik
     //executionni ishga tushurib qureyni yakunladik
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NNICK);
@@ -142,7 +144,9 @@ class MemberService {
     }
 
     //agarda hech qanday hotolik bolmaydigon bolsa member skima modelini findone static methodini call qilib unga member._id ni argument sifatida pass qilyapmiz hamda executionni yakunlab natijani kuttirib uni return qildik
-    return await this.memberModel.findOne(member._id).exec();
+    return await this.memberModel.findById(member._id).exec();
+    ///buyerda hoto bor edi findById bolishi kerak edi ekan men esa findOne qilgan ekamman
+
     //qaytatdan member malumotlarni topib keladida va uni reeturn qilib Frontendga chiroyli mantiqlarni jonatadi
   }
 
