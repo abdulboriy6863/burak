@@ -1,10 +1,17 @@
-// TASK Q
-function hasProperty(a: object, b: string) {
-  const result = Object.keys(a).some((keys) => keys === b);
-  console.log(result);
+//TASK R
+function calculate(a: string) {
+  const result = Number(a);
+  console.log(eval(a), `type of result:${typeof result}`);
 }
-hasProperty({ name: "BMW", model: "M3" }, "model");
-hasProperty({ name: "BMW", model: "M3" }, "M3");
+calculate("1 + 40");
+
+// TASK Q
+// function hasProperty(a: object, b: string) {
+//   const result = Object.keys(a).some((keys) => keys === b);
+//   console.log(result);
+// }
+// hasProperty({ name: "BMW", model: "M3" }, "model");
+// hasProperty({ name: "BMW", model: "M3" }, "M3");
 
 // TASK P
 // function objectToArray(a: object) {
