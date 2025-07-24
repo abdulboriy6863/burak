@@ -1,7 +1,6 @@
 //TASK R
 function calculate(a: string) {
-  const result = Number(a);
-  console.log(eval(a), `type of result:${typeof result}`);
+  console.log(eval(a));
 }
 calculate("1 + 40");
 
