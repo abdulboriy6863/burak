@@ -1,8 +1,21 @@
-//TASK R
-function calculate(a: string) {
-  console.log(eval(a));
+//TASK S
+function missingNum(a: number[]) {
+  const result = [];
+  for (let i = 1; i < Math.max(...a); i++) {
+    if (a.indexOf(i) === -1) {
+      result.push(i);
+    }
+  }
+  console.log(`'${result}'`);
 }
-calculate("1 + 40");
+
+missingNum([3, 0, 1, 5]);
+
+//TASK R
+// function calculate(a: string) {
+//   console.log(eval(a));
+// }
+// calculate("1 + 40");
 
 // TASK Q
 // function hasProperty(a: object, b: string) {
