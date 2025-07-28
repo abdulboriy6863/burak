@@ -1,15 +1,24 @@
-//TASK S
-function missingNum(a: number[]) {
-  const result = [];
-  for (let i = 1; i < Math.max(...a); i++) {
-    if (a.indexOf(i) === -1) {
-      result.push(i);
-    }
-  }
-  console.log(`'${result}'`);
+//TASK T
+function mergeSortedArrays(a: number[], b: number[]) {
+  const result = a.concat(b);
+
+  console.log(result);
 }
 
-missingNum([3, 0, 1, 5]);
+mergeSortedArrays([1, 2, 3, 4, 5], [2, 4, 2, 6]);
+
+//TASK S
+// function missingNum(a: number[]) {
+//   const result = [];
+//   for (let i = 1; i < Math.max(...a); i++) {
+//     if (a.indexOf(i) === -1) {
+//       result.push(i);
+//     }
+//   }
+//   console.log(`'${result}'`);
+// }
+
+// missingNum([3, 0, 1, 5]);
 
 //TASK R
 // function calculate(a: string) {
