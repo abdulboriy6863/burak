@@ -1,11 +1,24 @@
-//TASK T
-function mergeSortedArrays(a: number[], b: number[]) {
-  const result = a.concat(b);
-
+//TASK U
+function countOddsInRange(a: number) {
+  let result = 0;
+  for (let i = 1; i <= a; i++) {
+    if (i % 2 !== 0) {
+      result++;
+    }
+  }
   console.log(result);
 }
 
-mergeSortedArrays([1, 2, 3, 4, 5], [2, 4, 2, 6]);
+countOddsInRange(77);
+
+//TASK T
+// function mergeSortedArrays(a: number[], b: number[]) {
+//   const result = a.concat(b);
+
+//   console.log(result);
+// }
+
+// mergeSortedArrays([1, 2, 3, 4, 5], [2, 4, 2, 6]);
 
 //TASK S
 // function missingNum(a: number[]) {
@@ -176,3 +189,12 @@ mergeSortedArrays([1, 2, 3, 4, 5], [2, 4, 2, 6]);
 // }
 
 // countVowels("strinaag");
+
+//TASK T
+// function mergeSortedArrays(a: number[], b: number[]) {
+//   const result = [...a, ...b];
+
+//   console.log(result);
+// }
+
+// mergeSortedArrays([1, 2, 3, 4, 5], [2, 4, 2, 6]);
