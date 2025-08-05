@@ -1,15 +1,30 @@
-//TASK U
-function countOddsInRange(a: number) {
-  let result = 0;
-  for (let i = 1; i <= a; i++) {
-    if (i % 2 !== 0) {
-      result++;
-    }
+//TASK V
+function countChars(a: string): { [char: string]: number } {
+  const result: { [char: string]: number } = {};
+
+  for (const char of a) {
+    if (char === " ") continue;
+    result[char] = (result[char] || 0) + 1;
   }
-  console.log(result);
+
+  return result;
 }
 
-countOddsInRange(77);
+console.log(countChars("hello"));
+
+// Chiqaradi: { b: [0], a: [1, 3, 5], n: [2, 4] }
+//TASK U
+// function countOddsInRange(a: number) {
+//   let result = 0;
+//   for (let i = 1; i <= a; i++) {
+//     if (i % 2 !== 0) {
+//       result++;
+//     }
+//   }
+//   console.log(result);
+// }
+
+// countOddsInRange(77);
 
 //TASK T
 // function mergeSortedArrays(a: number[], b: number[]) {
