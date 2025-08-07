@@ -4,10 +4,12 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import Errors from "../libs/Errors";
+import AuthService from "../models/Auth.service";
 
 //REACT loyiha uchun
 
 const memberService = new MemberService();
+const authService = new AuthService();
 
 const memberController: T = {};
 
@@ -24,6 +26,8 @@ memberController.signup = async (req: Request, res: Response) => {
 
       result: Member = await memberService.signup(input);
     //memberService objectni processSignup methodiga newMemberni argument sifatida pass qilyapmis undan kelgan natijani kutib RESULT deb nomlangan variablega tenglayapmiz
+    const token = await authService.createToken(result);
+    console.log("token:::", token);
 
     res.json({ member: result });
   } catch (err) {
@@ -39,7 +43,9 @@ memberController.login = async (req: Request, res: Response) => {
     console.log("body:", req.body);
     const input: LoginInput = req.body,
       //MemberService moduledan hosil qilgan objectimizni processLogin methodiga argument sifatida inputni pass qilaymiz
-      result = await memberService.login(input);
+      result = await memberService.login(input),
+      token = await authService.createToken(result);
+    console.log("token:::", token);
     //TODO: TOKENS AUTHENTICATION
 
     res.json({ member: result });
