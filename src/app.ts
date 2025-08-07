@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true })); //MiddlaWere DP => TRADITIONAL 
 
 app.use(express.json()); //MiddlaWere DP => REST API lar uchun hizmat qiladi
 //backend bilan fronted orasida sof holatda json formatdagi malumotlarni oldi berdi qiladi.
-app.use(cookieParser());
+app.use(cookieParser()); //????????
 
 app.use(morgan(MORGAN_FORMAT)); //MiddlaWere DP => Loging jarayonini tashkillashtirib beradi
 //serverga HTTP dan kelayaotgan malumotlarni log qilish yani yozib berish uchun ishlatiladi
