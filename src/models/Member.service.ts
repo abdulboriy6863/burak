@@ -102,7 +102,7 @@ class MemberService {
     } catch (err) {
       console.log("messsage", err);
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
-      //////HATO BOR
+      //////
     }
   }
 
