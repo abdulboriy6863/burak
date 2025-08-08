@@ -14,7 +14,7 @@ router.post(
 );
 
 router.get(
-  "/member/details",
+  "/member/detail",
   memberController.verifyAuth,
   memberController.getMemberDetail
 );
