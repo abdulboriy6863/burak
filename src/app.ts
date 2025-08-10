@@ -24,6 +24,7 @@ const app = express(); //OBJECT
 //expressni exacution (qurish) natijasida app objectini qo'lga kirityapmiz. Bu object bilan nima qilyapmiz? BACKEND SERVERini quryapmiz
 
 app.use(express.static(path.join(__dirname, "public"))); //MiddlaWere DP => Public folderini frontendga ochiqlayapti
+app.use("/uploades", express.static("./uploads"));
 
 app.use(express.urlencoded({ extended: true })); //MiddlaWere DP => TRADITIONAL API lar uchun  hizmat qiladi
 
