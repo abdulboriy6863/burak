@@ -1,16 +1,39 @@
-//TASK V
-function countChars(a: string): { [char: string]: number } {
-  const result: { [char: string]: number } = {};
+//TASK X
+function countOccurrences(a: Record<string, any>, b: string): number {
+  let result = 0;
 
-  for (const char of a) {
-    if (char === " ") continue;
-    result[char] = (result[char] || 0) + 1;
+  for (const key in a) {
+    if (key === b) {
+      result++;
+    }
+
+    if (typeof a[key] === "object" && a[key] !== null) {
+      result += countOccurrences(a[key], b);
+    }
   }
-
   return result;
 }
 
-console.log(countChars("hello"));
+console.log(
+  countOccurrences(
+    { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
+    "model"
+  )
+);
+
+//TASK V
+// function countChars(a: string): { [char: string]: number } {
+//   const result: { [char: string]: number } = {};
+
+//   for (const char of a) {
+//     if (char === " ") continue;
+//     result[char] = (result[char] || 0) + 1;
+//   }
+
+//   return result;
+// }
+
+// console.log(countChars("hello"));
 
 // Chiqaradi: { b: [0], a: [1, 3, 5], n: [2, 4] }
 //TASK U
