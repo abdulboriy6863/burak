@@ -1,25 +1,47 @@
-//TASK X
-function countOccurrences(a: Record<string, any>, b: string): number {
-  let result = 0;
+// TASK Y
 
-  for (const key in a) {
-    if (key === b) {
-      result++;
-    }
+function findIntersection(a: number[], b: number[]) {
+  const result = a.filter((ele) => b.includes(ele));
 
-    if (typeof a[key] === "object" && a[key] !== null) {
-      result += countOccurrences(a[key], b);
-    }
-  }
-  return result;
+  console.log(result);
 }
 
-console.log(
-  countOccurrences(
-    { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
-    "model"
-  )
-);
+findIntersection([1, 2, 4], [2, 3, 4]);
+findIntersection([1, 0, 2, 5], [1, 2, 4, 5]);
+
+// Shunday function yozing, uni 2'ta array parametri bo'lsin.
+// Bu function ikkala arrayda ham ishtirok etgan bir xil
+// qiymatlarni yagona arrayga joylab qaytarsin.
+
+// MASALAN: findIntersection([1,2,3], [3,2,0]) return [2,3]
+
+// Yuqoridagi misolda, argument sifatida berilayotgan array'larda
+// o'xshash sonlar mavjud. Function'ning vazifasi esa ana shu
+// ikkala array'da ishtirok etgan o'xshash sonlarni yagona arrayga
+// joylab return qilmoqda.
+
+//TASK X
+// function countOccurrences(a: Record<string, any>, b: string): number {
+//   let result = 0;
+
+//   for (const key in a) {
+//     if (key === b) {
+//       result++;
+//     }
+
+//     if (typeof a[key] === "object" && a[key] !== null) {
+//       result += countOccurrences(a[key], b);
+//     }
+//   }
+//   return result;
+// }
+
+// console.log(
+//   countOccurrences(
+//     { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
+//     "model"
+//   )
+// );
 
 //TASK V
 // function countChars(a: string): { [char: string]: number } {
