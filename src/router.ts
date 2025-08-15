@@ -33,6 +33,12 @@ router.get("/member/top-users", memberController.getTopUsers);
 
 /* PRODUCT */
 router.get("/product/all", productController.getProducts);
+router.get(
+  "/product/:id",
+  memberController.retriveAuth,
+  productController.getProduct
+);
+
 /* ORDER */
 
 // router.get("/", memberController.goHome);
