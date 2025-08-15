@@ -36,7 +36,7 @@ class Productservice {
 
     const sort: T =
       inquiry.order === "productPrice"
-        ? { [inquiry.order]: -1 }
+        ? { [inquiry.order]: 1 }
         : { [inquiry.order]: -1 };
     const result = await this.productModel
       .aggregate([
