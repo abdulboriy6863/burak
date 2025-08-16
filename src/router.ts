@@ -47,6 +47,12 @@ router.post(
   ordercontroller.createOrder
 );
 
+router.get(
+  "/order/all",
+  memberController.verifyAuth,
+  ordercontroller.getMyOrders
+);
+
 // router.get("/", memberController.goHome);
 
 // router.get("/login", memberController.getLogin);
