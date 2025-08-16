@@ -1,4 +1,9 @@
-import { Order, OrderInquiry, OrderItemInput } from "../libs/types/order";
+import {
+  Order,
+  OrderInquiry,
+  OrderItemInput,
+  OrderUpdateInput,
+} from "../libs/types/order";
 import { Member } from "../libs/types/member";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
@@ -6,14 +11,17 @@ import { shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { ObjectId } from "mongoose";
 import { OrderStatus } from "../libs/enums/order.enum";
+import MemberService from "./Member.service";
 
 class OrderService {
   private readonly orderModel;
   private readonly orderItemModel;
+  private readonly memberService;
 
   constructor() {
     this.orderModel = OrderModel;
     this.orderItemModel = OrderItemModel;
+    this.memberService = new MemberService();
   }
 
   public async createOrder(
@@ -66,7 +74,7 @@ class OrderService {
     inquiry: OrderInquiry
   ): Promise<Order[]> {
     const memberid = shapeIntoMongooseObjectId(member._id);
-    const matches = { memberId: memberid, OrderStatus: inquiry.orderStatus };
+    const matches = { memberId: memberid, orderStatus: inquiry.orderStatus };
 
     const result = await this.orderModel
       .aggregate([
@@ -95,7 +103,33 @@ class OrderService {
       ])
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    console.log("keldi::::::", result);
+    return result;
+  }
 
+  public async updateOrder(
+    member: Member,
+    input: OrderUpdateInput
+  ): Promise<Order> {
+    const memberId = shapeIntoMongooseObjectId(member._id),
+      orderId = shapeIntoMongooseObjectId(input.orderId),
+      orderStatus = input.orderStatus;
+
+    console.log("3 chi malumot", orderStatus);
+
+    const result = await this.orderModel
+      .findOneAndUpdate(
+        { memberId: memberId, _id: orderId },
+        { orderStatus: orderStatus },
+        { new: true }
+      )
+      //filter, update, option
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+
+    if (orderStatus === OrderStatus.PROCESS) {
+      await this.memberService.addUserPoint(member, 1);
+    }
     return result;
   }
 }

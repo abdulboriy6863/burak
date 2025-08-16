@@ -53,6 +53,12 @@ router.get(
   ordercontroller.getMyOrders
 );
 
+router.post(
+  "/order/update",
+  memberController.verifyAuth,
+  ordercontroller.updateOrder
+);
+
 // router.get("/", memberController.goHome);
 
 // router.get("/login", memberController.getLogin);
