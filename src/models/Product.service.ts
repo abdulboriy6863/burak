@@ -89,7 +89,7 @@ class Productservice {
         result = await this.productModel
           .findByIdAndUpdate(
             productId,
-            { $inc: { productViews: +1 } }, // product view ga kirib bittaga oshir
+            { $inc: { productViews: +1 } }, // product view ga kirib bittaga oshir Increment
             { new: true }
           )
           .exec();
