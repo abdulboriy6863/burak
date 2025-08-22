@@ -124,7 +124,14 @@ class OrderService {
         { new: true }
       )
       //filter, update, option
+
       .exec();
+    console.log("member._id:", member._id);
+    console.log("memberId (converted):", memberId);
+    console.log("input.orderId:", input.orderId);
+    console.log("orderId (converted):", orderId);
+    console.log("result::::", result);
+
     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
 
     if (orderStatus === OrderStatus.PROCESS) {

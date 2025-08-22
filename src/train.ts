@@ -1,14 +1,32 @@
-// TASK Z
+//TASK ZA
 
-function sumEvens(a: number[]) {
-  const result = a
-    .filter((num) => num % 2 === 0 && num * 2)
-    .reduce((num, b) => num + b, 0);
+function sortByAge(a: any[]) {
+  a.sort((a, b) => a.age - b.age);
 
-  console.log(result);
+  console.log(a);
 }
 
-sumEvens([1, 2, 4, 5, 3, 8, 24]);
+sortByAge([{ age: 23 }, { age: 21 }, { age: 13 }]);
+
+// Shunday function yozing, u array ichidagi objectlarni
+// 'age' qiymati bo'yicha sortlab bersin.
+
+// MASALAN: sortByAge([{age:23}, {age:21}, {age:13}]) return [{age:13}, {age:21}, {age:23}]
+
+// Yuqoridagi misolda, kichik raqamlar katta raqamlar tomon
+// tartiblangan holatda return bo'lmoqda.
+
+// TASK Z
+
+// function sumEvens(a: number[]) {
+//   const result = a
+//     .filter((num) => num % 2 === 0 && num * 2)
+//     .reduce((num, b) => num + b, 0);
+
+//   console.log(result);
+// }
+
+// sumEvens([1, 2, 4, 5, 3, 8, 24]);
 
 // Shunday function yozing. Bu function sonlardan iborat array
 // qabul qilsin. Function'ning vazifasi array tarkibidagi juft
