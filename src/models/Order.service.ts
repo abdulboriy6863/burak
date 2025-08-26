@@ -83,21 +83,30 @@ class OrderService {
         { $skip: (inquiry.page - 1) * inquiry.limit },
         { $limit: inquiry.limit },
 
-        {
-          $lookup: {
-            from: "orderItems",
-            localField: "_id",
-            foreignField: "orderId",
-            as: "orderItems",
-          },
-        },
+        // {
+        //   $lookup: {
+        //     from: "orderItems",
+        //     localField: "_id",
+        //     foreignField: "orderId",
+        //     as: "orderItems",
+        //   },
+        // },
+
+        // {
+        //   $lookup: {
+        //     from: "products",
+        //     localField: "orderItems.productId",
+        //     foreignField: "_id",
+        //     as: "productData",
+        //   },
+        // },
 
         {
           $lookup: {
-            from: "products",
-            localField: "orderItems.productId",
+            localField: "memberId",
+            from: "members",
             foreignField: "_id",
-            as: "productData",
+            as: "menKeldim",
           },
         },
       ])

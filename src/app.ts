@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import path from "path"; //????
 import router from "./router";
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: true })); //MiddlaWere DP => TRADITIONAL 
 
 app.use(express.json()); //MiddlaWere DP => REST API lar uchun hizmat qiladi
 //backend bilan fronted orasida sof holatda json formatdagi malumotlarni oldi berdi qiladi.
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser()); //????????
 
 app.use(morgan(MORGAN_FORMAT)); //MiddlaWere DP => Loging jarayonini tashkillashtirib beradi
