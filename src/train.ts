@@ -1,14 +1,11 @@
 // TASK ZD
 
 function changeNumberInArray(a: number, b: number[], c: number) {
-  const result = b[a];
-
-  // for(let a = 0; a < b; a++ )
-
-  console.log(result);
+  b[a] = c;
+  console.log(b);
 }
 
-changeNumberInArray(1, [1, 3, 7, 2], 2);
+changeNumberInArray(2, [1, 3, 7, 2], 2);
 
 // Shunday function yozing. Bu function o'ziga, parametr sifatida
 // birinchi oddiy number, keyin yagona array va uchinchi bo'lib oddiy number
