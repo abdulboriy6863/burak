@@ -79,36 +79,36 @@ class OrderService {
     const result = await this.orderModel
       .aggregate([
         { $match: matches },
-        { $sort: { uptadeAt: -1 } },
+        { $sort: { updatedAt: -1 } },
         { $skip: (inquiry.page - 1) * inquiry.limit },
         { $limit: inquiry.limit },
 
-        // {
-        //   $lookup: {
-        //     from: "orderItems",
-        //     localField: "_id",
-        //     foreignField: "orderId",
-        //     as: "orderItems",
-        //   },
-        // },
-
-        // {
-        //   $lookup: {
-        //     from: "products",
-        //     localField: "orderItems.productId",
-        //     foreignField: "_id",
-        //     as: "productData",
-        //   },
-        // },
+        {
+          $lookup: {
+            from: "orderItems",
+            localField: "_id",
+            foreignField: "orderId",
+            as: "orderItems",
+          },
+        },
 
         {
           $lookup: {
-            localField: "memberId",
-            from: "members",
+            from: "products",
+            localField: "orderItems.productId",
             foreignField: "_id",
-            as: "menKeldim",
+            as: "productData",
           },
         },
+
+        // {
+        //   $lookup: {
+        //     localField: "memberId",
+        //     from: "members",
+        //     foreignField: "_id",
+        //     as: "menKeldim",
+        //   },
+        // },
       ])
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
