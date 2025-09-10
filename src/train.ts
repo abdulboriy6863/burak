@@ -1,17 +1,30 @@
+// TASK ZG
+
+function convertToSnakeCase(a: string) {
+  return a.toLowerCase().split(" ").join("_");
+}
+console.log(convertToSnakeCase("name should be a string"));
+
+// String sifatida berilgan string parametrni
+// snake case'ga o'tkazib beradigan function yozing.
+
+// MASALAN: convertToSnakeCase('name should be a string')
+// return 'name_should_be_a_string'
+
 // TASK ZF
 
-function capitalizeWords(a: string) {
-  const result = a
-    .split(" ")
-    .map((word, index) =>
-      word.length > 3 ? word[0].toUpperCase() + word.slice(1) : word
-    )
-    .join(" ");
+// function capitalizeWords(a: string) {
+//   const result = a
+//     .split(" ")
+//     .map((word, index) =>
+//       word.length > 3 ? word[0].toUpperCase() + word.slice(1) : word
+//     )
+//     .join(" ");
 
-  console.log(result);
-}
+//   console.log(result);
+// }
 
-capitalizeWords("name should be a string ok");
+// capitalizeWords("name should be a string ok");
 
 // Shunday function yozing, uni string parametri bo'lsin.
 // Ushbu function, har bir so'zni bosh harflarini katta harf qilib qaytarsin.
