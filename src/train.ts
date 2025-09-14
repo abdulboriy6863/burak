@@ -1,20 +1,35 @@
-// TASK ZH
+// TASK ZI
 
-function findDisappearedNumbers(a: number[]) {
-  const result = [];
-  const min = Math.min(...a);
-  const max = Math.max(...a);
-
-  for (let i = min; i <= max; i++) {
-    if (!a.includes(i)) {
-      result.push(i);
-    }
-  }
-
-  return result;
+function delayHelloWorld(a: string) {
+  setTimeout(() => {
+    console.log(a);
+  }, 3000);
 }
 
-console.log(findDisappearedNumbers([1, 3, 4, 10]));
+delayHelloWorld("Hello, World!");
+
+// Shundan function yozing, bu function 3 soniydan so'ng
+// "Hello World!" so'zini qaytarsin.
+
+// MASALAN: delayHelloWorld("Hello World"); return "Hello World";
+
+// TASK ZH
+
+// function findDisappearedNumbers(a: number[]) {
+//   const result = [];
+//   const min = Math.min(...a);
+//   const max = Math.max(...a);
+
+//   for (let i = min; i <= max; i++) {
+//     if (!a.includes(i)) {
+//       result.push(i);
+//     }
+//   }
+
+//   return result;
+// }
+
+// console.log(findDisappearedNumbers([1, 3, 4, 10]));
 
 // Shunday function yozing, u berilgan array parametri ichidagi
 // raqamlar orasidan, tartib bo'yicha eng kichik raqamdan, eng katta raqamgacha
