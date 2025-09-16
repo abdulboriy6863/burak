@@ -1,12 +1,30 @@
-// TASK ZI
+// TASK ZJ:
 
-function delayHelloWorld(a: string) {
-  setTimeout(() => {
-    console.log(a);
-  }, 3000);
+function reduceNestedArray(a: any[]) {
+  const result = a.flat(Infinity).reduce((acc, val) => acc + val, 0);
+
+  console.log(result);
 }
 
-delayHelloWorld("Hello, World!");
+reduceNestedArray([1, [1, 2, [4]]]);
+
+// Shunday function yozing, u berilgan array ichidagi
+// raqamlarni qiymatini hisoblab qaytarsin.
+
+// MASALAN: reduceNestedArray([1, [1, 2, [4]]]); return 8;
+
+// Yuqoridagi misolda, array nested bo'lgan holdatda ham,
+// bizning function ularning yig'indisini hisoblab qaytarmoqda.
+
+// TASK ZI
+
+// function delayHelloWorld(a: string) {
+//   setTimeout(() => {
+//     console.log(a);
+//   }, 3000);
+// }
+
+// delayHelloWorld("Hello, World!");
 
 // Shundan function yozing, bu function 3 soniydan so'ng
 // "Hello World!" so'zini qaytarsin.
