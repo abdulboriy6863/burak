@@ -6,6 +6,8 @@ import routerAdmin from "./router-admin";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import { MORGAN_FORMAT } from "./libs/config";
+import { Server as SocketIOServer } from "socket.io";
+import http from "http";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -72,7 +74,26 @@ app.use("/", router); // SPA: REACT => Frontend ni Frontend da qurish
 // middleware design pattern
 //Burak backend serverni REACT loyihamizga (rest api ) server sifatida ishlatamiz
 
-export default app;
+const server = http.createServer(app);
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+});
+
+let summaryClient = 0;
+io.on("connection", (socket) => {
+  summaryClient++;
+  console.log(`Connection total [${summaryClient}]`);
+
+  socket.on("disconnect", () => {
+    summaryClient--;
+    console.log(`DisConnect total [${summaryClient}]`);
+  });
+});
+
+export default server;
 
 //BSSR = Traditional API + Rest API orqali boladi
 //SPA = Rest API orqali bo'ladi
